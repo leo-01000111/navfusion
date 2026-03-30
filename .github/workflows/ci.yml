@@ -28,6 +28,8 @@ jobs:
         run: mypy src
       - name: Tests
         run: pytest --cov=navfusion --cov-report=term-missing
+      - name: Benchmark smoke
+        run: python benchmarks/benchmark_replay.py --durations 5 10 --output-dir benchmarks/artifacts/ci
 
   docs:
     runs-on: ubuntu-latest
