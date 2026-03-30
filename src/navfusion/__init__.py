@@ -1,6 +1,12 @@
 ﻿"""navfusion package exports."""
 
-from navfusion.analysis import ConsistencyReport, nees_position_velocity_report, nis_report
+from navfusion.analysis import (
+    ConsistencyReport,
+    FilterPerformanceReport,
+    nees_position_velocity_report,
+    nis_report,
+    summarize_filter_performance,
+)
 from navfusion.api import (
     StreamRunner,
     build_default_engine,
@@ -13,6 +19,7 @@ from navfusion.config import FilterType, FusionConfig, UKFConfig
 
 __all__ = [
     "ConsistencyReport",
+    "FilterPerformanceReport",
     "FilterType",
     "FusionConfig",
     "StreamRunner",
@@ -24,4 +31,5 @@ __all__ = [
     "nis_report",
     "run_replay",
     "run_stream",
+    "summarize_filter_performance",
 ]

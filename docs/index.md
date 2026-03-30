@@ -17,3 +17,4 @@
 - Innovation gating and update diagnostics
 - Replay and stream-friendly APIs
 - NIS/NEES consistency checks
+- EKF-vs-UKF comparison artifacts (RMSE/ANIS/ANEES/throughput)

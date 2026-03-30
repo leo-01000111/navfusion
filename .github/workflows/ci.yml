@@ -30,6 +30,8 @@ jobs:
         run: pytest --cov=navfusion --cov-report=term-missing
       - name: Benchmark smoke
         run: python benchmarks/benchmark_replay.py --durations 5 10 --output-dir benchmarks/artifacts/ci
+      - name: Comparison smoke
+        run: python benchmarks/compare_filters.py --scenarios nominal --duration 6 --output-dir benchmarks/artifacts/ci
 
   docs:
     runs-on: ubuntu-latest

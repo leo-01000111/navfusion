@@ -67,6 +67,7 @@ print(result.summary)
 ```bash
 python examples/generate_demo_assets.py
 python benchmarks/benchmark_replay.py
+python benchmarks/compare_filters.py --scenarios nominal dropout outlier --duration 60
 ```
 
 Outputs:
@@ -74,6 +75,8 @@ Outputs:
 - `docs/assets/*.png` and `docs/assets/demo_summary.md`
 - `benchmarks/artifacts/replay_benchmark.csv`
 - `benchmarks/artifacts/replay_summary.md`
+- `benchmarks/artifacts/filter_comparison.csv`
+- `benchmarks/artifacts/filter_comparison.md`
 
 ## Development
 
