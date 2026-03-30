@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 from numpy.typing import NDArray
@@ -17,11 +17,11 @@ class StateSpec:
     """Canonical state layout for v1 error-state EKF."""
 
     error_size: int = 15
-    p: slice = slice(0, 3)
-    v: slice = slice(3, 6)
-    theta: slice = slice(6, 9)
-    gyro_bias: slice = slice(9, 12)
-    accel_bias: slice = slice(12, 15)
+    p: slice = field(default_factory=lambda: slice(0, 3))
+    v: slice = field(default_factory=lambda: slice(3, 6))
+    theta: slice = field(default_factory=lambda: slice(6, 9))
+    gyro_bias: slice = field(default_factory=lambda: slice(9, 12))
+    accel_bias: slice = field(default_factory=lambda: slice(12, 15))
 
 
 STATE_SPEC = StateSpec()
