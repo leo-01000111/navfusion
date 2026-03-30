@@ -1,0 +1,31 @@
+﻿site_name: navfusion
+site_description: Engineering-grade modular sensor fusion for 3D navigation
+site_url: https://github.com/example/navfusion
+repo_url: https://github.com/example/navfusion
+repo_name: navfusion
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - API: api.md
+  - Tuning: tuning.md
+  - Demos: demos.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
