@@ -1,8 +1,8 @@
 ﻿site_name: navfusion
 site_description: Engineering-grade modular sensor fusion for 3D navigation
-site_url: https://github.com/example/navfusion
-repo_url: https://github.com/example/navfusion
-repo_name: navfusion
+site_url: https://github.com/leo-01000111/navfusion
+repo_url: https://github.com/leo-01000111/navfusion
+repo_name: leo-01000111/navfusion
 
 theme:
   name: material
@@ -15,8 +15,11 @@ nav:
   - Home: index.md
   - Architecture: architecture.md
   - API: api.md
+  - Consistency: consistency.md
+  - Benchmarks: benchmarks.md
   - Tuning: tuning.md
   - Demos: demos.md
+  - Demo Summary: assets/demo_summary.md
 
 plugins:
   - search
@@ -29,3 +32,4 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+  - pymdownx.superfences

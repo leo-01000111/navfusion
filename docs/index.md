@@ -16,3 +16,4 @@
 - Bounded out-of-order event handling
 - Innovation gating and update diagnostics
 - Replay and stream-friendly APIs
+- NIS/NEES consistency checks

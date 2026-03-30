@@ -1,0 +1,4 @@
+duration_s,total_events,elapsed_s,throughput_eps,accepted_updates,rejected_updates,late_dropped_events,final_covariance_trace
+30.000,3152,0.632441,4983.863,151,0,0,1.843342627
+120.000,12602,2.347179,5368.997,599,2,0,1.267056498
+300.000,31502,5.905225,5334.597,1499,2,0,1.388408253

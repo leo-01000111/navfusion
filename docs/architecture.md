@@ -7,6 +7,7 @@
 - `navfusion.filters`: filter contracts and EKF implementation
 - `navfusion.engine`: orchestration and async event handling
 - `navfusion.results`: run histories and summaries
+- `navfusion.analysis`: consistency metrics (`NIS`, `NEES`)
 - `navfusion.sensors`: raw packet to event adapters
 - `navfusion.viz`: plotting helpers
 
@@ -18,6 +19,23 @@
 4. IMU events drive prediction
 5. GNSS events trigger catch-up prediction + update + gating
 6. Histories and diagnostics emitted as `RunResult`
+
+## Runtime flow
+
+```mermaid
+flowchart LR
+    A[Sensor Packets] --> B[SensorAdapter]
+    B --> C[MeasurementEvent]
+    C --> D[EventReorderBuffer]
+    D --> E[FusionEngine]
+    E --> F[Predict IMU]
+    E --> G[Update GNSS]
+    G --> H[Innovation Gating]
+    F --> I[ErrorStateEKF]
+    H --> I
+    I --> J[RunResult]
+    J --> K[Consistency Reports and Plots]
+```
 
 ## State
 
