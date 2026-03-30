@@ -161,9 +161,9 @@ class UnscentedKalmanFilter:
         jitter = 1e-10
         for _ in range(6):
             try:
-                chol: NDArray[np.float64] = np.linalg.cholesky(
+                chol = np.linalg.cholesky(
                     cov_sym + jitter * np.eye(self._n, dtype=np.float64)
-                )
+                ).astype(np.float64, copy=False)
                 return chol
             except np.linalg.LinAlgError:
                 jitter *= 10.0
