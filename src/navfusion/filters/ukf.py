@@ -161,7 +161,10 @@ class UnscentedKalmanFilter:
         jitter = 1e-10
         for _ in range(6):
             try:
-                return np.linalg.cholesky(cov_sym + jitter * np.eye(self._n, dtype=np.float64))
+                chol: NDArray[np.float64] = np.linalg.cholesky(
+                    cov_sym + jitter * np.eye(self._n, dtype=np.float64)
+                )
+                return chol
             except np.linalg.LinAlgError:
                 jitter *= 10.0
         raise ValueError("Covariance is not positive definite even with jitter")
