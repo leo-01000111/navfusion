@@ -1,5 +1,17 @@
 ﻿# Tuning
 
+## Filter backend
+
+Configure in `FusionConfig`:
+
+- `filter_type`: `"ekf"` or `"ukf"`
+
+For UKF, tune in `UKFConfig`:
+
+- `alpha`
+- `beta`
+- `kappa`
+
 ## Process noise
 
 Tune in `ProcessNoiseConfig`:

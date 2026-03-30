@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Literal
 
 import numpy as np
 from numpy.typing import NDArray
 
 from navfusion.core.state import STATE_SPEC, GaussianBelief, NavState
+
+FilterType = Literal["ekf", "ukf"]
 
 
 @dataclass(frozen=True)
@@ -36,6 +39,13 @@ class GateConfig:
 
 
 @dataclass(frozen=True)
+class UKFConfig:
+    alpha: float = 0.5
+    beta: float = 2.0
+    kappa: float = 0.0
+
+
+@dataclass(frozen=True)
 class EngineConfig:
     reorder_window_ns: int = 200_000_000
     degrade_after_s: float = 2.0
@@ -61,11 +71,13 @@ class InitialUncertaintyConfig:
 
 @dataclass(frozen=True)
 class FusionConfig:
+    filter_type: FilterType = "ekf"
     gravity_mps2: float = 9.80665
     frame_id: str = "world"
     process_noise: ProcessNoiseConfig = ProcessNoiseConfig()
     gnss_noise: GnssNoiseConfig = GnssNoiseConfig()
     gate: GateConfig = GateConfig()
+    ukf: UKFConfig = UKFConfig()
     engine: EngineConfig = EngineConfig()
     initial_uncertainty: InitialUncertaintyConfig = InitialUncertaintyConfig()
 

@@ -19,6 +19,15 @@ for event in events:
 result = runner.finalize()
 ```
 
+## Filter selection
+
+```python
+from navfusion.config import FusionConfig
+
+result_ekf = run_replay(events, config=FusionConfig(filter_type="ekf"))
+result_ukf = run_replay(events, config=FusionConfig(filter_type="ukf"))
+```
+
 ## Main return type
 
 `RunResult` includes:

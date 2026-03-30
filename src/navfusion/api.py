@@ -9,7 +9,7 @@ from navfusion.config import FusionConfig, default_initial_belief
 from navfusion.core.events import MeasurementEvent
 from navfusion.core.state import GaussianBelief
 from navfusion.engine import FusionEngine
-from navfusion.filters import ErrorStateEKF
+from navfusion.filters import ErrorStateEKF, Filter, UnscentedKalmanFilter
 from navfusion.models import GNSSPositionVelocityModel, IMUKinematicsModel
 from navfusion.results import RunResult
 from navfusion.sensors import SensorAdapter
@@ -43,7 +43,7 @@ class StreamRunner:
 def build_default_filter(
     config: FusionConfig | None = None,
     initial_belief: GaussianBelief | None = None,
-) -> ErrorStateEKF:
+) -> Filter:
     cfg = config or FusionConfig()
     belief = initial_belief or default_initial_belief(cfg)
     motion_model = IMUKinematicsModel(
@@ -53,6 +53,16 @@ def build_default_filter(
     measurement_models = {
         "gnss": GNSSPositionVelocityModel(noise=cfg.gnss_noise),
     }
+    if cfg.filter_type == "ukf":
+        return UnscentedKalmanFilter(
+            belief=belief,
+            motion_model=motion_model,
+            measurement_models=measurement_models,
+            gate_enabled=cfg.gate.enabled,
+            gate_threshold=cfg.gate.threshold,
+            ukf_config=cfg.ukf,
+        )
+
     return ErrorStateEKF(
         belief=belief,
         motion_model=motion_model,

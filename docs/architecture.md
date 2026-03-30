@@ -4,7 +4,7 @@
 
 - `navfusion.core`: canonical state and event types, time/reorder primitives
 - `navfusion.models`: motion and measurement models
-- `navfusion.filters`: filter contracts and EKF implementation
+- `navfusion.filters`: filter contracts plus EKF and UKF implementations
 - `navfusion.engine`: orchestration and async event handling
 - `navfusion.results`: run histories and summaries
 - `navfusion.analysis`: consistency metrics (`NIS`, `NEES`)

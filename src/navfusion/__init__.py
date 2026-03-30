@@ -9,12 +9,14 @@ from navfusion.api import (
     run_replay,
     run_stream,
 )
-from navfusion.config import FusionConfig
+from navfusion.config import FilterType, FusionConfig, UKFConfig
 
 __all__ = [
     "ConsistencyReport",
+    "FilterType",
     "FusionConfig",
     "StreamRunner",
+    "UKFConfig",
     "build_default_engine",
     "build_default_filter",
     "create_stream_runner",

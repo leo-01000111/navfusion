@@ -10,7 +10,7 @@
 
 ## MVP in this repo
 
-- Error-state EKF with quaternion attitude state
+- Error-state EKF and UKF backends with quaternion attitude state
 - IMU propagation and GNSS position/velocity updates
 - Asynchronous event engine with bounded out-of-order handling
 - Innovation gating and run diagnostics
@@ -27,7 +27,7 @@ flowchart LR
     D --> E[Fusion Engine]
     E --> F[IMU Predict]
     E --> G[GNSS Update + Gating]
-    F --> H[Error-State EKF]
+    F --> H[EKF or UKF Backend]
     G --> H
     H --> I[RunResult + Diagnostics]
     I --> J[Plots + Benchmarks + Docs Artifacts]

@@ -11,7 +11,7 @@
 
 ## MVP features
 
-- Error-state EKF (quaternion attitude)
+- Error-state EKF and UKF backends (quaternion attitude)
 - IMU propagation + GNSS position/velocity updates
 - Bounded out-of-order event handling
 - Innovation gating and update diagnostics
