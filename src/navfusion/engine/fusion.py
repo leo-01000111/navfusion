@@ -144,6 +144,7 @@ class FusionEngine:
         self._state_history.append(
             state_record_from_nav_state(
                 state=state,
+                covariance=self._filter.belief.covariance,
                 covariance_trace=cov_trace,
                 degraded=self._filter.belief.degraded,
             )

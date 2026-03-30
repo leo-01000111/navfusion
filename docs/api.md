@@ -23,7 +23,13 @@ result = runner.finalize()
 
 `RunResult` includes:
 
-- `state_history`
+- `state_history` (with covariance snapshots)
 - `predict_history`
 - `update_history`
 - `summary`
+
+## Consistency module
+
+```python
+from navfusion.analysis import nis_report, nees_position_velocity_report
+```

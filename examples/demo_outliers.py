@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from navfusion.analysis import nis_report
 from navfusion.api import run_replay
 from navfusion.config import FusionConfig, GateConfig
 from navfusion.simulation import generate_imu_gnss_scenario
@@ -16,9 +17,14 @@ def main() -> None:
 
     config = FusionConfig(gate=GateConfig(enabled=True, threshold=16.812))
     result = run_replay(events, config=config)
+    nis = nis_report(result)
 
     print("Summary:", result.summary)
     print("Update reasons:", summarize_update_reasons(result))
+    print(
+        f"ANIS={nis.mean_value:.3f} "
+        f"(95% bounds [{nis.lower_95:.3f}, {nis.upper_95:.3f}], n={nis.sample_count})"
+    )
 
 
 if __name__ == "__main__":

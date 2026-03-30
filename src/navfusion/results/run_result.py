@@ -10,6 +10,7 @@ from numpy.typing import NDArray
 from navfusion.core.state import NavState
 
 Vec = NDArray[np.float64]
+Mat = NDArray[np.float64]
 
 
 @dataclass(frozen=True)
@@ -18,6 +19,7 @@ class StateRecord:
     position_m: Vec
     velocity_mps: Vec
     attitude_wxyz: Vec
+    covariance: Mat
     covariance_trace: float
     degraded: bool
 
@@ -70,6 +72,7 @@ class RunResult:
 
 def state_record_from_nav_state(
     state: NavState,
+    covariance: Mat,
     covariance_trace: float,
     degraded: bool,
 ) -> StateRecord:
@@ -78,6 +81,7 @@ def state_record_from_nav_state(
         position_m=state.position_m.copy(),
         velocity_mps=state.velocity_mps.copy(),
         attitude_wxyz=state.attitude_wxyz.copy(),
+        covariance=covariance.copy(),
         covariance_trace=covariance_trace,
         degraded=degraded,
     )
