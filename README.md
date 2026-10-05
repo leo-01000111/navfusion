@@ -1,23 +1,22 @@
-﻿# navfusion
+# navfusion
 
-`navfusion` is a real-time-first Python package for modular 3D navigation sensor fusion.
+`navfusion` is a Python package for modular 3D navigation sensor fusion, written with real-time use in mind.
 
-## Why this repo is different
+Documentation: https://www.leongorecki.eu/navfusion/
 
-- Deterministic async event handling with bounded out-of-order buffering.
-- Engineering diagnostics (innovation gating + consistency metrics) instead of EKF-only math demos.
-- Reproducible artifact pipeline for benchmarks and failure-mode demo images.
+## What is in the repo
 
-## MVP in this repo
-
-- Error-state EKF and UKF backends with quaternion attitude state
+- Error-state EKF and UKF backends with a quaternion attitude state
 - IMU propagation and GNSS position/velocity updates
-- Asynchronous event engine with bounded out-of-order handling
-- Innovation gating and run diagnostics
-- Deterministic replay utilities, tests, and demo scenarios
-- NIS/NEES consistency reports for CI guardrails
+- An asynchronous event engine with deterministic handling and a bounded out-of-order buffer
+- Innovation gating and per-run diagnostics
+- Deterministic replay utilities, tests and synthetic demo scenarios
+- NIS/NEES consistency checks that run in CI
+- An EKF-vs-UKF comparison report (position and velocity RMSE, ANIS, ANEES, throughput)
 
-## Architecture at a glance
+The focus is on the engineering around the filter: what happens when measurements arrive late, go missing or are wrong, and how you can tell from the diagnostics.
+
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -35,17 +34,19 @@ flowchart LR
 
 ## Failure-mode demos
 
-Dropout trajectory and covariance growth:
+GNSS dropout, trajectory and covariance growth:
 
 ![GNSS dropout trajectory](docs/assets/dropout_trajectory.png)
 ![Dropout covariance trace](docs/assets/dropout_covariance_trace.png)
 
-Out-of-order and outlier diagnostics:
+Out-of-order and outlier measurements, innovation traces:
 
 ![Out-of-order innovation trace](docs/assets/out_of_order_innovation.png)
 ![Outlier innovation trace](docs/assets/outlier_innovation.png)
 
 ## Install
+
+Requires Python 3.11 or newer.
 
 ```bash
 pip install -e .[dev,viz,docs]
@@ -62,7 +63,15 @@ result = run_replay(events)
 print(result.summary)
 ```
 
-## Generate portfolio artifacts
+The EKF is the default backend. To run the UKF instead:
+
+```python
+from navfusion.config import FusionConfig
+
+result = run_replay(events, config=FusionConfig(filter_type="ukf"))
+```
+
+## Benchmarks and demo artifacts
 
 ```bash
 python examples/generate_demo_assets.py
@@ -78,6 +87,10 @@ Outputs:
 - `benchmarks/artifacts/filter_comparison.csv`
 - `benchmarks/artifacts/filter_comparison.md`
 
+`benchmark_replay.py` accepts `--durations`, `--filter-types` and `--output-dir`.
+
+`compare_filters.py` feeds the same synthetic scenario to the EKF and the UKF. For each scenario and filter it reports position and velocity RMSE against ground truth, ANIS (average normalized innovation squared), ANEES (average normalized estimation error squared), replay throughput in events per second, and how many measurements were accepted, rejected or dropped as too late. Its options are `--scenarios` (`nominal`, `dropout`, `outlier`, `out_of_order`), `--filter-types`, `--duration`, `--seed` and `--output-dir`.
+
 ## Development
 
 ```bash
@@ -87,3 +100,9 @@ ruff check .
 mypy src
 mkdocs serve
 ```
+
+The documentation sources are in `docs/` and are built with MkDocs.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

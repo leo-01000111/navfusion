@@ -48,9 +48,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/navfusion"
-Repository = "https://github.com/example/navfusion"
-Documentation = "https://github.com/example/navfusion"
+Homepage = "https://github.com/leo-01000111/navfusion"
+Repository = "https://github.com/leo-01000111/navfusion"
+Documentation = "https://www.leongorecki.eu/navfusion/"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/navfusion"]
